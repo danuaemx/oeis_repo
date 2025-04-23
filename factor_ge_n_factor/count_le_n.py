@@ -73,7 +73,7 @@ def main():
     print(f"Values of N ≤ {N_max} where T(N) = T(N+1):")
     print(equal_consec)
     print(f"Total: {len(equal_consec)}")
-    print(f"Rat: {len(equal_consec)/N_max}")
+    print(f"Rat: {len(equal_consec)/max(equal_consec)}")
 
 if __name__ == "__main__":
     main()
