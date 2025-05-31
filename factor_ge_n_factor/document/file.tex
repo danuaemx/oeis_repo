@@ -1,0 +1,108 @@
+\documentclass[]{article}
+
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{geometry}
+\usepackage{hyperref, graphicx}
+
+%library theorem environment
+\theoremstyle{plain}% default
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}    
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem*{cor}{Corollary}
+\newtheorem*{KL}{Klein’s Lemma}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{conj}{Conjecture}[section]
+\newtheorem{exmp}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+%opening
+\title{Optimal Multiplicative partitions: Number vs Individual size}
+\author{Daniel Eduardo Ruiz C. \\ \texttt{druizc005@alumno.uaemex.mx}}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+
+\begin{abstract}
+	This article introduces a function $P_{\pi}(n)$ defined on positive integers, representing the maximum number of factors in a multiplicative partition of $n$ where each factor is greater than or equal to the number of factors. The article contains a formal definition for $P_{\pi}(n)$ and illustrates its properties with examples. Subsequently are defined three distinct integer sequences based on the local behavior of $P_{\pi}(n)$, specifically by comparing the values of $P_{\pi}(m)$ and $P_{\pi}(m+1)$. These sequences categorize integers $m$ based on whether $P_{\pi}(m)$ is greater than, less than, or equal to $P_{\pi}(m+1)$.
+\end{abstract}
+
+\tableofcontents
+
+\section{Principal Definitions}
+
+Multiplicative partitions, which are ways of expressing an integer as a product of integer factors, constitute a classical area of study in number theory. This paper focuses on a particular type of constrained multiplicative partition, characterized by a function denoted $P_{\pi}(n)$. The function $P_{\pi}(n)$ is defined as the largest possible number of factors in a multiplicative partition of $n$ under the specific constraint that every factor must be at least as large as the total count of factors in that partition. As noted, "this function is related to the multiplicative structure of n, and the growth of $P_{\pi}(n)$ is irregular and influenced by the density of its divisors."
+
+We will first provide a formal definition for $P_{\pi}(n)$, along with illustrative examples. Following this, we will define three distinct integer sequences, whose terms are integers $m$ characterized by the local behavior of $P_{\pi}(n)$, specifically by comparing $P_{\pi}(m)$ with $P_{\pi}(m+1)$.
+\subsection{Partition Function}
+\begin{defn}[The function $P_{\pi}(n)$]
+	\label{defn:part_func}
+	Let $n$ be a positive integer. The function $P_{\pi}(n)$ is defined as the largest positive integer $k$ such that $n$ can be written as a product of $k$ integer factors $d_1, d_2, \ldots, d_k$, i.e., $n = d_1 \cdot d_2 \cdot \ldots \cdot d_k$, where each factor $d_i$ satisfies the condition $d_i \ge k$.
+	
+	Equivalently, $P_{\pi}(n)$ is the maximum size $k$ of a multi-set of integers $A = \{d_1, d_2, \ldots, d_k\}$ such that:
+	\begin{enumerate}
+		\item The product of the elements of $A$ is $n$: $\prod_{i=1}^k d_i = n$.
+		\item Each element $d_i \in A$ is greater than or equal to the size of the multi-set $A$: $d_i \ge k$ for all $i=1, \ldots, k$.
+	\end{enumerate}
+	For $n=1$, the only multi-set is $A=\{1\}$. The size of this multi-set is $k=1$. The single factor $d_1=1$ satisfies the condition $d_1 \ge k$ (since $1 \ge 1$). Thus, $f(1)=1$.
+\end{defn}
+
+\begin{exmp}
+	The following examples illustrate the calculation of $P_{\pi}(n)$:
+	\begin{itemize}
+		\item For $n=10$:
+		If $k=1$, the partition is $\{10\}$. Since $10 \ge 1$, this is valid.
+		If $k=2$, we need factors $d_1, d_2$ such that $d_1 d_2 = 10$ and $d_1, d_2 \ge 2$. The partition $\{2,5\}$ satisfies these conditions ($2 \ge 2$ and $5 \ge 2$). So $k=2$ is possible.
+		If $k=3$, we need factors $d_1, d_2, d_3$ such that $d_1 d_2 d_3 = 10$ and $d_1, d_2, d_3 \ge 3$. The smallest possible product of three integers, each at least 3, is $3 \cdot 3 \cdot 3 = 27$. Since $27 > 10$, $k=3$ is not possible for $n=10$.
+		Thus, the maximum $k$ is 2, so $f(10)=2$.
+		
+		\item For $n=11$:
+		If $k=1$, the partition is $\{11\}$. Since $11 \ge 1$, this is valid.
+		If $k=2$, we need factors $d_1, d_2$ such that $d_1 d_2 = 11$ and $d_1, d_2 \ge 2$. As 11 is prime, its only positive integer factors are 1 and 11. The partition $\{1,11\}$ has $d_1=1$, which does not satisfy $d_1 \ge 2$. Thus, $k=2$ is not possible.
+		Therefore, $f(11)=1$.
+		
+		\item For $n=63$:
+		The problem states that $f(63)=3$. This is supported by the partition $\{3,3,7\}$. Here, $k=3$, and all factors ($3,3,7$) are greater than or equal to $k=3$.
+		To confirm $k$ cannot be 4, we would require four factors $d_1, d_2, d_3, d_4$ each at least 4. Their product would be at least $4^4 = 256$, which is greater than 63. So $f(63)=3$.
+		
+		\item For $n=64$:
+		The problem states that $f(64)=3$. This is supported by the partition $\{4,4,4\}$. Here, $k=3$, and all factors ($4,4,4$) are greater than or equal to $k=3$.
+		Similarly, $k=4$ would require factors $\ge 4$, leading to a product of at least $4^4=256 > 64$. So $f(64)=3$.
+	\end{itemize}
+\end{exmp}
+\subsection{Local Behavior Sequences}
+Using the function $P_{\pi}(n)$, we define three sequences based on the relationship between $P_{\pi}(m)$ and $P_{\pi}(m+1)$.
+
+\begin{defn}[Sequence of Decrease $(d_j)$]
+	The sequence $(d_j)_{j \ge 1}$ consists of all positive integers $m$, listed in increasing order, such that $P_{\pi}(m) > P_{\pi}(m+1)$.
+\end{defn}
+
+\begin{defn}[Sequence of Increase $(i_j)$]
+	The sequence $(i_j)_{j \ge 1}$ consists of all positive integers $m$, listed in increasing order, such that $P_{\pi}(m) < P_{\pi}(m+1)$.
+\end{defn}
+
+\begin{defn}[Sequence of Equality $(e_j)$]
+	The sequence $(e_j)_{j \ge 1}$ consists of all positive integers $m$, listed in increasing order, such that $P_{\pi}(m) = P_{\pi}(m+1)$.
+\end{defn}
+
+\begin{exmp}
+	The behavior of $P_{\pi}(n)$ at consecutive integers determines membership in these sequences:
+	\begin{itemize}
+		\item For $m=10$: We have $P_{\pi}(10)=2$ and $P_{\pi}(11)=1$. Since $P_{\pi}(10) > P_{\pi}(11)$ (i.e., $2 > 1$), the integer $10$ is a term in the sequence $(d_j)$.
+		
+		\item For $m=63$: We have $P_{\pi}(63)=3$ and $P_{\pi}(64)=3$. Since $P_{\pi}(63) = P_{\pi}(64)$ (i.e., $3 = 3$), the integer $63$ is a term in the sequence $(e_j)$.
+		
+		\item To illustrate the sequence $(i_j)$, consider $m=7$.
+		$P_{\pi}(7)=1$ (since 7 is prime, only partition is $\{7\}$, $k=1$, $7 \ge 1$).
+		For $P_{\pi}(8)$: If $k=1$, $\{8\}$ is valid. If $k=2$, factors $d_1, d_2 \ge 2$. $\{2,4\}$ works ($2\ge 2, 4\ge 2$). If $k=3$, factors $d_1,d_2,d_3 \ge 3$. Smallest product $3^3=27 > 8$. So $P_{\pi}(8)=2$.
+		Since $P_{\pi}(7) < P_{\pi}(8)$ (i.e., $1 < 2$), the integer $7$ is a term in the sequence $(i_j)$.
+	\end{itemize}
+\end{exmp}
+
+\end{document}
