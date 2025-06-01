@@ -1,0 +1,289 @@
+\documentclass[]{article}
+
+\usepackage{amsmath, amssymb, amsthm}
+\usepackage{geometry}
+\usepackage{hyperref, graphicx}
+
+%library theorem environment
+\theoremstyle{plain}% default
+\newtheorem{thm}{Theorem}[section]
+\newtheorem{lem}[thm]{Lemma}    
+\newtheorem{prop}[thm]{Proposition}
+\newtheorem*{cor}{Corollary}
+\newtheorem*{KL}{Klein’s Lemma}
+\theoremstyle{definition}
+\newtheorem{defn}{Definition}[section]
+\newtheorem{conj}{Conjecture}[section]
+\newtheorem{exmp}{Example}[section]
+\theoremstyle{remark}
+\newtheorem*{rem}{Remark}
+\newtheorem*{note}{Note}
+\newtheorem{case}{Case}
+%opening
+\title{Optimal Multiplicative partitions: Number vs Individual size}
+\author{Daniel Eduardo Ruiz C. \\ \texttt{druizc005@alumno.uaemex.mx}}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+
+\begin{abstract}
+	This article introduces a function $P_{\pi}(n)$ defined on positive integers, representing the maximum number of factors in a multiplicative partition of $n$ where each factor is greater than or equal to the number of factors. The article contains a formal definition for $P_{\pi}(n)$ and illustrates its properties with examples. Subsequently are defined three distinct integer sequences based on the local behavior of $P_{\pi}(n)$, specifically by comparing the values of $P_{\pi}(m)$ and $P_{\pi}(m+1)$. These sequences categorize integers $m$ based on whether $P_{\pi}(m)$ is greater than, less than, or equal to $P_{\pi}(m+1)$.
+\end{abstract}
+
+\tableofcontents
+
+\section{Principal Definitions}
+
+Multiplicative partitions, which are ways of expressing an integer as a product of integer factors, constitute a classical area of study in number theory. This paper focuses on a particular type of constrained multiplicative partition, characterized by a function denoted $P_{\pi}(n)$. The function $P_{\pi}(n)$ is defined as the largest possible number of factors in a multiplicative partition of $n$ under the specific constraint that every factor must be at least as large as the total count of factors in that partition. As noted, "this function is related to the multiplicative structure of n, and the growth of $P_{\pi}(n)$ is irregular and influenced by the density of its divisors."
+
+\subsection{Partition Function}
+\begin{defn}[The function $P_{\pi}(n)$]
+	\label{defn:part_func}
+	Let $n$ be a positive integer. The function $P_{\pi}(n)$ is defined as the largest positive integer $k$ such that $n$ can be written as a product of $k$ integer factors $d_1, d_2, \ldots, d_k$, i.e., $n = d_1 \cdot d_2 \cdot \ldots \cdot d_k$, where each factor $d_i$ satisfies the condition $d_i \ge k$.
+	
+	Equivalently, $P_{\pi}(n)$ is the maximum size $k$ of a multi-set of integers $A = \{d_1, d_2, \ldots, d_k\}$ such that:
+	\begin{enumerate}
+		\item The product of the elements of $A$ is $n$: $\prod_{i=1}^k d_i = n$.
+		\item Each element $d_i \in A$ is greater than or equal to the size of the multi-set $A$: $d_i \ge k$ for all $i=1, \ldots, k$.
+	\end{enumerate}
+	For $n=1$, the only multi-set is $A=\{1\}$. The size of this multi-set is $k=1$. The single factor $d_1=1$ satisfies the condition $d_1 \ge k$ (since $1 \ge 1$). Thus, $f(1)=1$.
+\end{defn}
+\begin{figure}[h]
+	\caption{Partition Function for $n$ up to 200}
+	\centering
+	\includegraphics[width=0.9\textwidth]{graph/partition_function_200.png}
+\end{figure}
+\begin{exmp}
+	The following examples illustrate the calculation of $P_{\pi}(n)$:
+	\begin{itemize}
+		\item For $n=10$:
+		If $k=1$, the partition is $\{10\}$. Since $10 \ge 1$, this is valid.
+		If $k=2$, we need factors $d_1, d_2$ such that $d_1 d_2 = 10$ and $d_1, d_2 \ge 2$. The partition $\{2,5\}$ satisfies these conditions ($2 \ge 2$ and $5 \ge 2$). So $k=2$ is possible.
+		If $k=3$, we need factors $d_1, d_2, d_3$ such that $d_1 d_2 d_3 = 10$ and $d_1, d_2, d_3 \ge 3$. The smallest possible product of three integers, each at least 3, is $3 \cdot 3 \cdot 3 = 27$. Since $27 > 10$, $k=3$ is not possible for $n=10$.
+		Thus, the maximum $k$ is 2, so $f(10)=2$.
+		
+		\item For $n=11$:
+		If $k=1$, the partition is $\{11\}$. Since $11 \ge 1$, this is valid.
+		If $k=2$, we need factors $d_1, d_2$ such that $d_1 d_2 = 11$ and $d_1, d_2 \ge 2$. As 11 is prime, its only positive integer factors are 1 and 11. The partition $\{1,11\}$ has $d_1=1$, which does not satisfy $d_1 \ge 2$. Thus, $k=2$ is not possible.
+		Therefore, $f(11)=1$.
+		
+		\item For $n=63$:
+		The problem states that $f(63)=3$. This is supported by the partition $\{3,3,7\}$. Here, $k=3$, and all factors ($3,3,7$) are greater than or equal to $k=3$.
+		To confirm $k$ cannot be 4, we would require four factors $d_1, d_2, d_3, d_4$ each at least 4. Their product would be at least $4^4 = 256$, which is greater than 63. So $f(63)=3$.
+		
+		\item For $n=64$:
+		The problem states that $f(64)=3$. This is supported by the partition $\{4,4,4\}$. Here, $k=3$, and all factors ($4,4,4$) are greater than or equal to $k=3$.
+		Similarly, $k=4$ would require factors $\ge 4$, leading to a product of at least $4^4=256 > 64$. So $f(64)=3$.
+	\end{itemize}
+\end{exmp}
+\subsection{Local Behavior Sequences}
+Using the function $P_{\pi}(n)$, we define three sequences based on the relationship between $P_{\pi}(m)$ and $P_{\pi}(m+1)$.
+
+\begin{defn}[Sequence of Decrease $(d_j)$]
+	The sequence $(d_j)_{j \ge 1}$ consists of all positive integers $m$, listed in increasing order, such that $P_{\pi}(m) > P_{\pi}(m+1)$.
+\end{defn}
+
+\begin{figure}[h]
+	\caption{Sequence of Decrease for $d_j$ up to $10^5$}
+	\centering
+	\includegraphics[width=0.9\textwidth]{graph/decrease_sequence_10_5.png}
+\end{figure}
+
+\begin{defn}[Sequence of Equality $(e_j)$]
+	The sequence $(e_j)_{j \ge 1}$ consists of all positive integers $m$, listed in increasing order, such that $P_{\pi}(m) = P_{\pi}(m+1)$.
+\end{defn}
+\begin{figure}[h]
+	\caption{Sequence of Equality for $e_j$ up to $10^5$}
+	\centering
+	\includegraphics[width=0.9\textwidth]{graph/equality_sequence_10_5.png}
+\end{figure}
+\begin{defn}[Sequence of Increase $(i_j)$]
+	The sequence $(i_j)_{j \ge 1}$ consists of all positive integers $m$, listed in increasing order, such that $P_{\pi}(m) < P_{\pi}(m+1)$.
+\end{defn}
+\begin{figure}[h]
+	\caption{Sequence of Increase for $i_j$ up to $10^5$}
+	\centering
+	\includegraphics[width=0.9\textwidth]{graph/increase_sequence_10_5.png}
+\end{figure}
+\begin{exmp}
+	The behavior of $P_{\pi}(n)$ at consecutive integers determines membership in these sequences:
+	\begin{itemize}
+		\item For $m=10$: We have $P_{\pi}(10)=2$ and $P_{\pi}(11)=1$. Since $P_{\pi}(10) > P_{\pi}(11)$ (i.e., $2 > 1$), the integer $10$ is a term in the sequence $(d_j)$.
+		
+		\item For $m=63$: We have $P_{\pi}(63)=3$ and $P_{\pi}(64)=3$. Since $P_{\pi}(63) = P_{\pi}(64)$ (i.e., $3 = 3$), the integer $63$ is a term in the sequence $(e_j)$.
+		
+		\item To illustrate the sequence $(i_j)$, consider $m=7$.
+		$P_{\pi}(7)=1$ (since 7 is prime, only partition is $\{7\}$, $k=1$, $7 \ge 1$).
+		For $P_{\pi}(8)$: If $k=1$, $\{8\}$ is valid. If $k=2$, factors $d_1, d_2 \ge 2$. $\{2,4\}$ works ($2\ge 2, 4\ge 2$). If $k=3$, factors $d_1,d_2,d_3 \ge 3$. Smallest product $3^3=27 > 8$. So $P_{\pi}(8)=2$.
+		Since $P_{\pi}(7) < P_{\pi}(8)$ (i.e., $1 < 2$), the integer $7$ is a term in the sequence $(i_j)$.
+	\end{itemize}
+\end{exmp}
+\subsection {Convergence Conjecture}
+\begin{conj}
+	Let $M$ be a fixed integer and let:
+	$$ j^{(-)}_M = \max \{ j :  d_j\le M\},$$
+	$$ j^{(0)}_M = \max \{ j :  e_j\le M\},$$
+	and
+	$$ j^{(+)}_M = \max \{ j :  i_j\le M\}.$$
+	Converges the following ratios:
+	$$ C^{(\pm)} = \lim_{M \to \infty} \frac{j^{(-)}_M}{d_{j^{(-)}_M}} = \lim_{M \to \infty}\frac{j^{(+)}_M}{i_{j^{(+)}_M}}, \quad C^{(0)} = \lim_{M \to \infty} \frac{j^{(0)}_M}{e_{j^{(0)}_M}},$$
+	one has the regime $ \forall s_M \in \{d_{j^{(-)}_M},e_{j^{(0)}_M},i_{j^{(+)}_M}\} $
+	$$ |M-s_M| << M, $$
+	and consequently
+	$$ 1 = 2C^{(\pm)} +C^{(0)}.$$
+\end{conj}
+
+\begin{table}[h]
+	\centering
+	\caption{Statistical Convergence Analysis of the Conjecture for Various Values of $M$ up to $10^6$}
+	\label{tab:statistical_conjecture_analysis}
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
+			\hline
+			$M$ & $j^{(-)}_M$ & $d_{j^{(-)}_M}$ & $j^{(0)}_M$ & $e_{j^{(0)}_M}$ & $j^{(+)}_M$ & $i_{j^{(+)}_M}$ & $C^{(-)}$ & $C^{(0)}$ & $C^{(+)}$ \\
+			\hline
+			38838 & 14226 & 38838 & 10379 & 38837 & 14233 & 38835 & 0.366291 & 0.267245 & 0.366499 \\
+			\hline
+			49904 & 18295 & 49900 & 13326 & 49904 & 18283 & 49903 & 0.366633 & 0.267033 & 0.366371 \\
+			\hline
+			63946 & 23496 & 63945 & 16964 & 63946 & 23486 & 63944 & 0.367441 & 0.265286 & 0.367290 \\
+			\hline
+			64480 & 23685 & 64480 & 17119 & 64478 & 23676 & 64479 & 0.367323 & 0.265501 & 0.367189 \\
+			\hline
+			75000 & 27588 & 75000 & 19830 & 74997 & 27582 & 74999 & 0.367840 & 0.264411 & 0.367765 \\
+			\hline
+			1e+05 & 36867 & 100000 & 26270 & 99996 & 36863 & 99999 & 0.368670 & 0.262711 & 0.368634 \\
+			\hline
+			1e+05 & 45690 & 123805 & 32436 & 123806 & 45681 & 123807 & 0.369048 & 0.261991 & 0.368969 \\
+			\hline
+			1e+05 & 46103 & 124944 & 32731 & 124941 & 46110 & 124943 & 0.368989 & 0.261972 & 0.369048 \\
+			\hline
+			2e+05 & 55394 & 150000 & 39201 & 149998 & 55405 & 149999 & 0.369293 & 0.261343 & 0.369369 \\
+			\hline
+			2e+05 & 80409 & 217065 & 56321 & 217066 & 80337 & 217067 & 0.370437 & 0.259465 & 0.370102 \\
+			\hline
+			2e+05 & 92675 & 250000 & 64738 & 249998 & 92587 & 249999 & 0.370700 & 0.258954 & 0.370349 \\
+			\hline
+			4e+05 & 130047 & 350000 & 89896 & 349995 & 130057 & 349999 & 0.371563 & 0.256849 & 0.371592 \\
+			\hline
+			4e+05 & 149291 & 401536 & 102901 & 401532 & 149345 & 401537 & 0.371800 & 0.256271 & 0.371933 \\
+			\hline
+			5e+05 & 199947 & 536700 & 136788 & 536694 & 199965 & 536699 & 0.372549 & 0.254871 & 0.372583 \\
+			\hline
+			6e+05 & 239123 & 641396 & 163090 & 641398 & 239185 & 641387 & 0.372816 & 0.254273 & 0.372918 \\
+			\hline
+			7e+05 & 262535 & 703872 & 178696 & 703870 & 262642 & 703873 & 0.372987 & 0.253876 & 0.373138 \\
+			\hline
+			8e+05 & 279870 & 750000 & 190149 & 749997 & 279981 & 749999 & 0.373160 & 0.253533 & 0.373308 \\
+			\hline
+			9e+05 & 338604 & 906176 & 228881 & 906175 & 338692 & 906177 & 0.373663 & 0.252579 & 0.373759 \\
+			\hline
+			
+		\end{tabular}%
+	}
+\end{table}
+
+\begin{table}[h]
+	\centering
+	\caption{Statistical Conjecture Relation Analysis: $2C^{(\pm)} + C^{(0)} = 1$}
+	\label{tab:statistical_conjecture_relation}
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{|c|c|c|c|c|c|c|c|}
+			\hline
+			$M$ & $C^{(-)}$ & $C^{(0)}$ & $C^{(+)}$ & $2C^{(-)}$ & $2C^{(-)} + C^{(0)}$ & $2C^{(+)} + C^{(0)}$ & $\left|1 - (2C^{(-)} + C^{(0)})\right|$ \\
+			\hline
+			38838 & 0.366291 & 0.267245 & 0.366499 & 0.732581 & 0.999827 & 1.000244 & 0.000173 \\
+			\hline
+			49904 & 0.366633 & 0.267033 & 0.366371 & 0.733267 & 1.000299 & 0.999774 & 0.000299 \\
+			\hline
+			63946 & 0.367441 & 0.265286 & 0.367290 & 0.734882 & 1.000168 & 0.999867 & 0.000168 \\
+			\hline
+			64480 & 0.367323 & 0.265501 & 0.367189 & 0.734646 & 1.000148 & 0.999880 & 0.000148 \\
+			\hline
+			75000 & 0.367840 & 0.264411 & 0.367765 & 0.735680 & 1.000091 & 0.999940 & 0.000091 \\
+			\hline
+			1e+05 & 0.368670 & 0.262711 & 0.368634 & 0.737340 & 1.000051 & 0.999978 & 0.000051 \\
+			\hline
+			1e+05 & 0.369048 & 0.261991 & 0.368969 & 0.738096 & 1.000087 & 0.999929 & 0.000087 \\
+			\hline
+			1e+05 & 0.368989 & 0.261972 & 0.369048 & 0.737979 & 0.999950 & 1.000068 & 0.000050 \\
+			\hline
+			2e+05 & 0.369293 & 0.261343 & 0.369369 & 0.738587 & 0.999930 & 1.000082 & 0.000070 \\
+			\hline
+			2e+05 & 0.370437 & 0.259465 & 0.370102 & 0.740875 & 1.000340 & 0.999670 & 0.000340 \\
+			\hline
+			2e+05 & 0.370700 & 0.258954 & 0.370349 & 0.741400 & 1.000354 & 0.999653 & 0.000354 \\
+			\hline
+			4e+05 & 0.371563 & 0.256849 & 0.371592 & 0.743126 & 0.999975 & 1.000034 & 0.000025 \\
+			\hline
+			4e+05 & 0.371800 & 0.256271 & 0.371933 & 0.743600 & 0.999871 & 1.000138 & 0.000129 \\
+			\hline
+			5e+05 & 0.372549 & 0.254871 & 0.372583 & 0.745098 & 0.999969 & 1.000038 & 0.000031 \\
+			\hline
+			6e+05 & 0.372816 & 0.254273 & 0.372918 & 0.745633 & 0.999906 & 1.000109 & 0.000094 \\
+			\hline
+			7e+05 & 0.372987 & 0.253876 & 0.373138 & 0.745974 & 0.999850 & 1.000153 & 0.000150 \\
+			\hline
+			8e+05 & 0.373160 & 0.253533 & 0.373308 & 0.746320 & 0.999853 & 1.000150 & 0.000147 \\
+			\hline
+			9e+05 & 0.373663 & 0.252579 & 0.373759 & 0.747325 & 0.999904 & 1.000098 & 0.000096 \\
+			\hline
+			
+		\end{tabular}%
+	}
+\end{table}
+
+\begin{table}[h]
+	\centering
+	\caption{Statistical Analysis of Differences $|M - s_M|$ for Convergence}
+	\label{tab:statistical_differences_analysis}
+	\resizebox{\textwidth}{!}{%
+		\begin{tabular}{|c|c|c|c|c|c|c|}
+			\hline
+			$M$ & $|M - d_{j^{(-)}_M}|$ & $|M - e_{j^{(0)}_M}|$ & $|M - i_{j^{(+)}_M}|$ & $\frac{|M - d_{j^{(-)}_M}|}{M}$ & $\frac{|M - e_{j^{(0)}_M}|}{M}$ & $\frac{|M - i_{j^{(+)}_M}|}{M}$ \\
+			\hline
+			38838 & 0 & 1 & 3 & 0.000000 & 0.000026 & 0.000077 \\
+			\hline
+			49904 & 4 & 0 & 1 & 0.000080 & 0.000000 & 0.000020 \\
+			\hline
+			63946 & 1 & 0 & 2 & 0.000016 & 0.000000 & 0.000031 \\
+			\hline
+			64480 & 0 & 2 & 1 & 0.000000 & 0.000031 & 0.000016 \\
+			\hline
+			75000 & 0 & 3 & 1 & 0.000000 & 0.000040 & 0.000013 \\
+			\hline
+			1e+05 & 0 & 4 & 1 & 0.000000 & 0.000040 & 0.000010 \\
+			\hline
+			1e+05 & 2 & 1 & 0 & 0.000016 & 0.000008 & 0.000000 \\
+			\hline
+			1e+05 & 0 & 3 & 1 & 0.000000 & 0.000024 & 0.000008 \\
+			\hline
+			2e+05 & 0 & 2 & 1 & 0.000000 & 0.000013 & 0.000007 \\
+			\hline
+			2e+05 & 2 & 1 & 0 & 0.000009 & 0.000005 & 0.000000 \\
+			\hline
+			2e+05 & 0 & 2 & 1 & 0.000000 & 0.000008 & 0.000004 \\
+			\hline
+			4e+05 & 0 & 5 & 1 & 0.000000 & 0.000014 & 0.000003 \\
+			\hline
+			4e+05 & 1 & 5 & 0 & 0.000002 & 0.000012 & 0.000000 \\
+			\hline
+			5e+05 & 0 & 6 & 1 & 0.000000 & 0.000011 & 0.000002 \\
+			\hline
+			6e+05 & 2 & 0 & 11 & 0.000003 & 0.000000 & 0.000017 \\
+			\hline
+			7e+05 & 1 & 3 & 0 & 0.000001 & 0.000004 & 0.000000 \\
+			\hline
+			8e+05 & 0 & 3 & 1 & 0.000000 & 0.000004 & 0.000001 \\
+			\hline
+			9e+05 & 1 & 2 & 0 & 0.000001 & 0.000002 & 0.000000 \\
+			\hline
+			
+		\end{tabular}%
+	}
+\end{table}
+
+\end{document}
