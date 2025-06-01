@@ -51,7 +51,11 @@ Multiplicative partitions, which are ways of expressing an integer as a product 
 	\end{enumerate}
 	For $n=1$, the only multi-set is $A=\{1\}$. The size of this multi-set is $k=1$. The single factor $d_1=1$ satisfies the condition $d_1 \ge k$ (since $1 \ge 1$). Thus, $f(1)=1$.
 \end{defn}
-
+\begin{figure}[h]
+	\caption{Partition Function for $n$ up to 200}
+	\centering
+	\includegraphics[width=0.9\textwidth]{graph/partition_function_200.png}
+\end{figure}
 \begin{exmp}
 	The following examples illustrate the calculation of $P_{\pi}(n)$:
 	\begin{itemize}
@@ -82,14 +86,28 @@ Using the function $P_{\pi}(n)$, we define three sequences based on the relation
 	The sequence $(d_j)_{j \ge 1}$ consists of all positive integers $m$, listed in increasing order, such that $P_{\pi}(m) > P_{\pi}(m+1)$.
 \end{defn}
 
-\begin{defn}[Sequence of Increase $(i_j)$]
-	The sequence $(i_j)_{j \ge 1}$ consists of all positive integers $m$, listed in increasing order, such that $P_{\pi}(m) < P_{\pi}(m+1)$.
-\end{defn}
+\begin{figure}[h]
+	\caption{Sequence of Decrease for $d_j$ up to $10^5$}
+	\centering
+	\includegraphics[width=0.9\textwidth]{graph/decrease_sequence_10_5.png}
+\end{figure}
 
 \begin{defn}[Sequence of Equality $(e_j)$]
 	The sequence $(e_j)_{j \ge 1}$ consists of all positive integers $m$, listed in increasing order, such that $P_{\pi}(m) = P_{\pi}(m+1)$.
 \end{defn}
-
+\begin{figure}[h]
+	\caption{Sequence of Equality for $e_j$ up to $10^5$}
+	\centering
+	\includegraphics[width=0.9\textwidth]{graph/equality_sequence_10_5.png}
+\end{figure}
+\begin{defn}[Sequence of Increase $(i_j)$]
+	The sequence $(i_j)_{j \ge 1}$ consists of all positive integers $m$, listed in increasing order, such that $P_{\pi}(m) < P_{\pi}(m+1)$.
+\end{defn}
+\begin{figure}[h]
+	\caption{Sequence of Increase for $i_j$ up to $10^5$}
+	\centering
+	\includegraphics[width=0.9\textwidth]{graph/increase_sequence_10_5.png}
+\end{figure}
 \begin{exmp}
 	The behavior of $P_{\pi}(n)$ at consecutive integers determines membership in these sequences:
 	\begin{itemize}
@@ -103,5 +121,18 @@ Using the function $P_{\pi}(n)$, we define three sequences based on the relation
 		Since $P_{\pi}(7) < P_{\pi}(8)$ (i.e., $1 < 2$), the integer $7$ is a term in the sequence $(i_j)$.
 	\end{itemize}
 \end{exmp}
-
+\subsection {Convergence Conjecture}
+\begin{conj}
+	Let $M$ be a fixed integer and let:
+	$$ j^{(-)}_M = \max \{ j :  d_j\le M\},$$
+	$$ j^{(0)}_M = \max \{ j :  e_j\le M\},$$
+	and
+	$$ j^{(+)}_M = \max \{ j :  i_j\le M\}.$$
+	Converges the following ratios:
+	$$ C^{(\pm)} = \lim_{M \to \infty} \frac{j^{(-)}_M}{d_{j^{(-)}_M}} = \lim_{M \to \infty}\frac{j^{(+)}_M}{i_{j^{(+)}_M}}, \quad C^{(0)} = \lim_{M \to \infty} \frac{j^{(0)}_M}{e_{j^{(0)}_M}},$$
+	one has the regime $ \forall s_M \in \{d_{j^{(-)}_M},e_{j^{(0)}_M},i_{j^{(+)}_M}\} $
+	$$ |M-s_M| << M, $$
+	and consequently
+	$$ 1 = \frac{2}{ C^{(\pm)}} + \frac{1}{C^{(0)}}.$$
+\end{conj}
 \end{document}
