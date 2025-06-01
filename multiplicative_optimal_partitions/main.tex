@@ -30,7 +30,8 @@
 
 
 \begin{abstract}
-	This article introduces a function $P_{\pi}(n)$ defined on positive integers, representing the maximum number of factors in a multiplicative partition of $n$ where each factor is greater than or equal to the number of factors. The article contains a formal definition for $P_{\pi}(n)$ and illustrates its properties with examples. Subsequently are defined three distinct integer sequences based on the local behavior of $P_{\pi}(n)$, specifically by comparing the values of $P_{\pi}(m)$ and $P_{\pi}(m+1)$. These sequences categorize integers $m$ based on whether $P_{\pi}(m)$ is greater than, less than, or equal to $P_{\pi}(m+1)$.
+	This article introduces a function $P_{\pi}(n)$ defined on positive integers, representing the maximum number $k$ of factors in a multiplicative partition of $n$ where each factor $d_i$ must satisfy $d_i \ge k$. We analyze the local behavior of $P_{\pi}(n)$ by defining three sequences based on whether $P_{\pi}(m) > P_{\pi}(m+1)$ (sequence of decrease, $d_j$), $P_{\pi}(m) = P_{\pi}(m+1)$ (sequence of equality, $e_j$), or $P_{\pi}(m) < P_{\pi}(m+1)$ (sequence of increase, $i_j$). We conjecture that these sequences possess asymptotic densities, denoted $C^{(-)}$, $C^{(0)}$, and $C^{(+)}$, respectively. This relies on the observation that the largest sequence terms $s_M$ up to a large integer $M$ are very close to $M$. Empirical evidence for $M$ up to $9 \times 10^5$ suggests that these densities converge, with $C^{(-)} \approx C^{(+)} \approx 0.373$ and $C^{(0)} \approx 0.252$. Furthermore these three local behaviors comprehensively describe the transitions of $P_{\pi}(n)$ across the integers. The study provides statistical support for these conjectures and discusses properties of the sequences and the function $P_{\pi}(n)$.
+	
 \end{abstract}
 
 \tableofcontents
@@ -121,24 +122,67 @@ Using the function $P_{\pi}(n)$, we define three sequences based on the relation
 		Since $P_{\pi}(7) < P_{\pi}(8)$ (i.e., $1 < 2$), the integer $7$ is a term in the sequence $(i_j)$.
 	\end{itemize}
 \end{exmp}
-\subsection {Convergence Conjecture}
-\begin{conj}
+\subsection{Initial Terms of $P_{\pi}(n)$ and Derived Sequences}
+\label{subsec:initial_terms}
+This section is reserved for listing the initial terms of the partition function $P_{\pi}(n)$ and the derived sequences $(d_j)$, $(e_j)$, and $(i_j)$.
+
+\vspace{5mm}
+\noindent \textbf{Initial values of $P_{\pi}(n)$:}
+% TODO: Populate with P_pi(n) for n = 1, 2, ..., N (e.g., N=20 or 30)
+% Example: P_pi(1)=1, P_pi(2)=1, P_pi(3)=1, P_pi(4)=1, P_pi(5)=1, P_pi(6)=1, P_pi(7)=1, P_pi(8)=2, ...
+
+
+\noindent \textbf{Initial terms of Sequence of Decrease $(d_j)$:}
+4, 6, 10, 12, 16, 18, 22, 27, 28, 30, 36, 40, 42, 45, 46, 48, 52, 54, 58, 60, 64, 66, 70, 72, 75, 78, 81, 82, 84, 88, 90, 96, 100, 102, 105, 106, 108, 112, 117, 120 \dots
+
+\noindent \textbf{Initial terms of Sequence of Equality $(e_j)$:}
+1, 2, 8, 9, 14, 15, 20, 21, 24, 25, 32, 33, 34, 38, 39, 49, 50, 51, 55, 56, 57, 63, 65, 68, 69, 76, 77, 80, 85, 86, 87, 91, 92, 93, 94, 99, 110, 114, 115, 118, 121 \dots
+
+\noindent \textbf{Initial terms of Sequence of Increase $(i_j)$:}
+3, 5, 7, 11, 13, 17, 19, 23, 26, 29, 31, 35, 37, 41, 43, 44, 47, 53, 59, 61, 62, 67, 71, 73, 74, 79, 83, 89, 95, 97, 98, 101, 103, 104, 107, 109, 111, 113, 116, 119 \dots
+
+
+\section {Convergence Conjecture}
+\begin{conj}[Asymptotic Densities of Local Behaviors]
+	\label{conj:ratios}
 	Let $M$ be a fixed integer and let:
 	$$ j^{(-)}_M = \max \{ j :  d_j\le M\},$$
 	$$ j^{(0)}_M = \max \{ j :  e_j\le M\},$$
 	and
 	$$ j^{(+)}_M = \max \{ j :  i_j\le M\}.$$
-	Converges the following ratios:
+	The elements of the three sequences are conjectured to satisfy
+	$$   \forall s_M \in \{d_{j^{(-)}_M},e_{j^{(0)}_M},i_{j^{(+)}_M}\}, \quad |M-s_M| \ll M. $$
+	It is further conjectured the asymptotic densities of these sequences exist and are given by:
 	$$ C^{(\pm)} = \lim_{M \to \infty} \frac{j^{(-)}_M}{d_{j^{(-)}_M}} = \lim_{M \to \infty}\frac{j^{(+)}_M}{i_{j^{(+)}_M}}, \quad C^{(0)} = \lim_{M \to \infty} \frac{j^{(0)}_M}{e_{j^{(0)}_M}},$$
-	one has the regime $ \forall s_M \in \{d_{j^{(-)}_M},e_{j^{(0)}_M},i_{j^{(+)}_M}\} $
-	$$ |M-s_M| << M, $$
 	and consequently
 	$$ 1 = 2C^{(\pm)} +C^{(0)}.$$
 \end{conj}
+\begin{rem}
+	The condition $ |M-s_M| \ll M $ for $ s_M \in \{d_{j^{(-)}_M},e_{j^{(0)}_M},i_{j^{(+)}_M}\} $ signifies that for a sufficiently large integer $M$, the largest terms $d_{j^{(-)}_M}$, $e_{j^{(0)}_M}$, and $i_{j^{(+)}_M}$ of the respective sequences that are less than or equal to $M$ are indeed very close to $M$. This proximity ensures that the counts $j^{(-)}_M, j^{(0)}_M, j^{(+)}_M$ (i.e., the number of terms up to $M$) are representative of the density of these sequence terms across the interval $[1, M]$. Consequently, the ratios $C^{(-)} = j^{(-)}_M/d_{j^{(-)}_M}$, $C^{(0)} = j^{(0)}_M/e_{j^{(0)}_M}$, and $C^{(+)} = j^{(+)}_M/i_{j^{(+)}_M}$ (often approximated as $j^{(-)}_M/M$, $j^{(0)}_M/M$, $j^{(+)}_M/M$ due to $s_M \approx M$) become meaningful estimates of the true asymptotic densities. Table \ref{tab:statistical_differences_analysis} provides empirical support for this condition, demonstrating that the relative differences $|M-s_M|/M$ are consistently small for large $M$.
+\end{rem}
+\begin{figure}[h]
+	\caption{Bar Chart of Distribution by Levels for values up to $10^5$}
+	\centering
+	\includegraphics[width=0.9\textwidth]{graph/level_frequencies_10_5.png}
+\end{figure}
+\subsection{Empirical Observations and Sequence Densities}
+The conjectured limits $C^{(-)}, C^{(0)},$ and $C^{(+)}$ can be interpreted as the asymptotic densities of integers $m$ for which $P_{\pi}(m) > P_{\pi}(m+1)$, $P_{\pi}(m) = P_{\pi}(m+1)$, and $P_{\pi}(m) < P_{\pi}(m+1)$, respectively.
+Analysis of the data in Table \ref{tab:statistical_conjecture_analysis} for values of $M$ up to $9 \times 10^5$ reveals the following trends for the estimated densities:
+\begin{itemize}
+	\item The density $C^{(-)}$ for the sequence of decrease $(d_j)$ stabilizes around $0.3736$.
+	\item The density $C^{(0)}$ for the sequence of equality $(e_j)$ stabilizes around $0.2525$.
+	\item The density $C^{(+)}$ for the sequence of increase $(i_j)$ stabilizes around $0.3737$.
+\end{itemize}
+These numerical results suggest that integers $m$ marking a decrease ($P_{\pi}(m) > P_{\pi}(m+1)$) and those marking an increase ($P_{\pi}(m) < P_{\pi}(m+1)$) in the $P_{\pi}$ function occur with nearly identical and the highest frequencies. Integers $m$ where $P_{\pi}(m) = P_{\pi}(m+1)$ are less frequent. The sum $2C^{(\pm)} + C^{(0)}$ (approximating $2 \times 0.3736 + 0.2525 \approx 0.7472 + 0.2525 = 0.9997$ for the largest $M$ values) is consistently close to $1$, as detailed in Table \ref{tab:statistical_conjecture_relation}. This empirically validates the conjecture that these three types of local behavior partition the set of positive integers, and leads to the two following conclusions:
+\begin{itemize}
+	\item The condition $|M-s_M| \ll M$ (Table \ref{tab:statistical_differences_analysis}) holds robustly, indicating that the chosen $M$ values do not terminate prematurely within long stretches devoid of sequence terms. This supports the reliability of density calculations.
+	\item The convergence of $C^{(-)}, C^{(0)}, C^{(+)}$ appears relatively smooth with increasing $M$.
+\end{itemize}
+Further investigation could explore the distribution of lengths of consecutive runs of $d_j, e_j,$ or $i_j$ type integers, or analyze the behavior of these densities over different scales and special values of $M$.
 
 \begin{table}[h]
 	\centering
-	\caption{Statistical Convergence Analysis of the Conjecture for Various Values of $M$ up to $10^6$}
+	\caption{Statistical Convergence Analysis of the Conjecture \ref{conj:ratios} for Various Values of $M$ up to $10^6$}
 	\label{tab:statistical_conjecture_analysis}
 	\resizebox{\textwidth}{!}{%
 		\begin{tabular}{|c|c|c|c|c|c|c|c|c|c|}
@@ -188,7 +232,7 @@ Using the function $P_{\pi}(n)$, we define three sequences based on the relation
 
 \begin{table}[h]
 	\centering
-	\caption{Statistical Conjecture Relation Analysis: $2C^{(\pm)} + C^{(0)} = 1$}
+	\caption{Statistical Conjecture \ref{conj:ratios} Relation Analysis: $2C^{(\pm)} + C^{(0)} = 1$}
 	\label{tab:statistical_conjecture_relation}
 	\resizebox{\textwidth}{!}{%
 		\begin{tabular}{|c|c|c|c|c|c|c|c|}
@@ -238,7 +282,7 @@ Using the function $P_{\pi}(n)$, we define three sequences based on the relation
 
 \begin{table}[h]
 	\centering
-	\caption{Statistical Analysis of Differences $|M - s_M|$ for Convergence}
+	\caption{Statistical Analysis of Differences $|M - s_M|$ for Convergence in Conjecture \ref{conj:ratios}}
 	\label{tab:statistical_differences_analysis}
 	\resizebox{\textwidth}{!}{%
 		\begin{tabular}{|c|c|c|c|c|c|c|}
@@ -285,5 +329,39 @@ Using the function $P_{\pi}(n)$, we define three sequences based on the relation
 		\end{tabular}%
 	}
 \end{table}
+\section{Conclusion and Future Work}
+\label{sec:conclusion}
+
+The function $P_{\pi}(n)$ and its associated local behavior sequences $(d_j)$, $(e_j)$, and $(i_j)$ provide a unique framework for analyzing multiplicative partitions constrained by the number of their parts. The empirical data presented strongly supports the Convergence Conjecture, suggesting that these three types of local transitions partition the set of positive integers with stable asymptotic densities, where $C^{(-)} \approx C^{(+)} \approx 0.373$ and $C^{(0)} \approx 0.252$ based on current estimates.
+
+This study opens up several promising directions for future research:
+
+\subsection{Properties of $P_{\pi}(n)$ and Derived Sequences}
+\begin{itemize}
+	\item \textbf{Analytical Understanding of $P_{\pi}(n)$:} Developing analytical bounds (beyond trivial ones), determining the average or maximal order of $P_{\pi}(n)$, or finding an asymptotic formula for $P_{\pi}(n)$ would be significant theoretical advancements.
+	\item \textbf{Characterizing Sequence Members:} A deeper dive into the number-theoretic properties (e.g., prime factorization structure, divisibility, values of other arithmetic functions like $\Omega(n)$ or $\sigma_0(n)$) of integers within each sequence $(d_j)$, $(e_j)$, $(i_j)$ could illuminate underlying reasons for their classification.
+	\item \textbf{Investigating Runs and Patterns:} Studying the distribution of lengths of consecutive integers belonging to the same sequence type (e.g., a long run of $m$ where $P_{\pi}(m) = P_{\pi}(m+1)$) could reveal insights into the local stability and correlational structure of $P_{\pi}(n)$.
+\end{itemize}
+
+\subsection{Level Distributions and Conditional Frequencies}
+\begin{itemize}
+	\item \textbf{Behavior within $P_{\pi}(n)=k$ Strata:} For a fixed integer $k \ge 1$, let $S_k = \{ m : P_{\pi}(m) = k \}$. Analyzing the conditional frequencies of $m \in S_k$ also belonging to $(d_j)$, $(e_j)$, or $(i_j)$ could be very revealing. For example, how does the proportion of $m \in S_k$ that are points of increase (i.e., $m \in (i_j)$) change as $k$ varies? This could shed light on how the function typically transitions away from a certain level $k$.
+	\item \textbf{Specific Case $P_{\pi}(n)=1$:} Integers $m$ with $P_{\pi}(m)=1$ (which include all primes, and other numbers like $1, 4, 6, 9, \dots$) cannot be in $(d_j)$ because $P_{\pi}(m+1)$ must be at least $1$. Thus, these $m$ are either in $(e_j)$ (if $P_{\pi}(m+1)=1$) or $(i_j)$ (if $P_{\pi}(m+1)>1$). The relative frequencies of these outcomes for the subset of integers with $P_{\pi}(m)=1$ would be a focused area of study.
+\end{itemize}
+
+\subsection{Analysis of Convergence and the $|M-s_M|$ Gap}
+\begin{itemize}
+	\item \textbf{The Nature of the Gap $|M-s_M|$:} Table \ref{tab:statistical_differences_analysis} indicates that for $s_M \in \{d_{j^{(-)}_M}, e_{j^{(0)}_M}, i_{j^{(+)}_M}\}$, the absolute difference $|M-s_M|$ is small. The maximum such difference observed in the provided table is 11. A key question is whether this difference $|M-s_M|$ remains bounded as $M \to \infty$, or if it grows, how slowly (e.g., $\log M$, $\log \log M$). This is crucial for the rigor of using $M$ as the denominator in density calculations.
+	\item \textbf{Rate of Convergence of Densities:} Quantifying the speed at which the ratios $j^{(-)}_M/M$, $j^{(0)}_M/M$, and $j^{(+)}_M/M$ approach their respective limits $C^{(-)}$, $C^{(0)}$, and $C^{(+)}$ could provide further insights, possibly involving error terms related to $M$.
+\end{itemize}
+
+\subsection{Further Explorations and Generalizations}
+\begin{itemize}
+	\item \textbf{Modifying Partition Constraints:} One could explore variations of the $P_{\pi}(n)$ function by altering the fundamental constraint $d_i \ge k$. For instance, what if $d_i \ge c \cdot k$ for some constant $c \neq 1$, or $d_i \ge k-c$, or $d_i \ge f(k)$ for some other slowly growing function $f$? How would such changes impact the existence and values of the corresponding densities?
+	\item \textbf{Probabilistic Modeling:} Attempting to model the sequence of differences $P_{\pi}(m+1) - P_{\pi}(m)$ using a probabilistic framework (e.g., a type of random walk or a Markov chain on the values of $P_{\pi}(n)$) might offer a path to theoretically derive or explain the observed densities.
+	\item \textbf{Relationship to Highly Composite Numbers:} Since $P_{\pi}(n)$ relates to factorizations, exploring its behavior for specific classes of numbers, such as highly composite numbers, primorials, or perfect powers, might reveal interesting patterns or extremal behaviors.
+\end{itemize}
+
+Pursuing these research avenues could substantially enhance our comprehension of this particular type of multiplicative partition and the rich statistical patterns that emerge from its local behavior.
 
 \end{document}
