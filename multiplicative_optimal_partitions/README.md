@@ -121,9 +121,7 @@ if (k == 2) {
 
 ```bash
 # Compile with maximum optimization for exact algorithm
-gcc -O3 -march=native -mtune=native -flto -funroll-loops \
-    -ffast-math -DNDEBUG -s -Wall -Wextra -Wpedantic -std=c99 \
-    -o optimal_partitions_exact optimal_partitions_exact_chunked.c -lm
+gcc -O3 -o optimal_exact optimal_partitions_exact_chunked.c -lm
 
 # Generate exact results for 1M numbers (default)
 ./optimal_partitions_exact
