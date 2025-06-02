@@ -52,13 +52,13 @@ The dataset classifies each integer n based on how P_π(n) compares to P_π(n+1)
 
 ### Dataset Statistics
 
-Based on the complete dataset (n=1 to 100,000):
+Based on a complete dataset (n=1 to 10 000 000):
 
 | Sequence Type | Count | Density | Example Terms |
 |---------------|-------|---------|---------------|
-| **Decrease** | ~37,370 | ~0.3737 | 4, 6, 10, 12, 16, 18, 22, 27, 28, 30... |
-| **Equality** | ~25,250 | ~0.2525 | 1, 2, 8, 9, 14, 15, 20, 21, 24, 25... |
-| **Increase** | ~37,380 | ~0.3738 | 3, 5, 7, 11, 13, 17, 19, 23, 26, 29... |
+| **Decrease** | 3784952 | ~0.3784 | 4, 6, 10, 12, 16, 18, 22, 27, 28, 30... |
+| **Equality** | 2429845 | ~0.2429 | 1, 2, 8, 9, 14, 15, 20, 21, 24, 25... |
+| **Increase** | 3785203 | ~0.3785 | 3, 5, 7, 11, 13, 17, 19, 23, 26, 29... |
 
 These empirical densities validate the theoretical conjecture: **2C⁽±⁾ + C⁽⁰⁾ = 1**
 
