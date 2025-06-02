@@ -1,0 +1,2 @@
+Collection of .csv archives up to 10**n whit the folloeing columns:
+n,P_pi(n),Factorization,SequenceType,SequenceIndex
